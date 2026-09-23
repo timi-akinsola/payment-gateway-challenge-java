@@ -11,8 +11,8 @@ CHANGELOG:
 1. Added Bean Validation to Gradle Build Info (build-info).
 2. Deleted GetPaymentResponse and renamed PostPaymentResponse to PaymentResponse to consolidate Response model to one type (as they were identical before anyway).
 3. Renamed PostPaymentRequest to PaymentRequest to simplify the relation between PaymentRequest and PaymentResponse.
-4. Renamed card_number_last_four to card_number to capture the full number.
-5. Changed card_number_last_four and cvv from int to String in PaymentRequest and PaymentResponse to natively handle leading and trailing zeros.
+4. Renamed card_number_last_four to card_number in PaymentRequest to capture the full number. Left PaymentResponse as-is.
+5. Changed card_number and cvv from int to String in PaymentRequest (along with card_number_last_four in PaymentResponse) to natively handle leading and trailing zeros.
 6. Reformatted expiry date to always be 2 digits for expiry day & month (accounting for leading zeroes.
 	- NOTE: Maybe remove this later, as expiry date shouldn't be inbound request information as opposed to outbound response information?
 7. Added NotBlank and Regex constraint to cardNumberLastFour
@@ -24,8 +24,10 @@ CHANGELOG:
 12. Added NotBlank and Pattern constraint to CVV.
 13. Removed CVV from PaymentRequest.toString() to avoid exposing sensitive data.
 
+14. Turned PaymentsRepository into an interface and created an InMemoryPaymentsRepository class to implement it, to allow for scalability with other data access mechanisms (Postgres, Redis, etc.) while utilising dependency injection.
+15. Created a new PaymentNotFoundException to more accurately categorise exceptions related to PaymentsRepository (e.g. incorrectly input card number).
 
 
 GENERAL NOTES: 
-- Changelogs are manually updated -- could import a library (which one?) or use implement an AI prompt to autonomously generate a changelog for each commit instead.
+- Changelogs are manually updated -- could import a library (e.g. https://github.com/spring-io/github-changelog-generator) or use implement an AI prompt to autonomously generate a changelog for each commit instead.
 	- This was done so I had a clearer picture on my progress and rationale behind my actions at each step, in case I thought of a better refactor/optimisation approach later on.
