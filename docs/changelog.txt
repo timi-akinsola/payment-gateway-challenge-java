@@ -1,0 +1,31 @@
+Checkout.com Take-Home Exercise
+Payment Gateway Challenge
+
+By Timilehin Akinsola
+Started on 23rd September 2026
+
+---
+
+CHANGELOG: 
+
+1. Added Bean Validation to Gradle Build Info (build-info).
+2. Deleted GetPaymentResponse and renamed PostPaymentResponse to PaymentResponse to consolidate Response model to one type (as they were identical before anyway).
+3. Renamed PostPaymentRequest to PaymentRequest to simplify the relation between PaymentRequest and PaymentResponse.
+4. Renamed card_number_last_four to card_number to capture the full number.
+5. Changed card_number_last_four and cvv from int to String in PaymentRequest and PaymentResponse to natively handle leading and trailing zeros.
+6. Reformatted expiry date to always be 2 digits for expiry day & month (accounting for leading zeroes.
+	- NOTE: Maybe remove this later, as expiry date shouldn't be inbound request information as opposed to outbound response information?
+7. Added NotBlank and Regex constraint to cardNumberLastFour
+8. Added Min & Max range constraint to expiryMonth. 
+	- NOTE: Would use Range but that's from the Hibernate package while all other validators are from Jakarta, so let's minimise dependencies.
+9. Changed expiryMonth and expiryYear to Integer and added NotNull constraint, to make it more clear that the values cannot be null/blank as ints.
+10. Added NotBlank and Regex constraint to currency.
+11. Added Positive constraint to amount.
+12. Added NotBlank and Pattern constraint to CVV.
+13. Removed CVV from PaymentRequest.toString() to avoid exposing sensitive data.
+
+
+
+GENERAL NOTES: 
+- Changelogs are manually updated -- could import a library (which one?) or use implement an AI prompt to autonomously generate a changelog for each commit instead.
+	- This was done so I had a clearer picture on my progress and rationale behind my actions at each step, in case I thought of a better refactor/optimisation approach later on.

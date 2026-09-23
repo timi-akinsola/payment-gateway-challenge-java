@@ -3,10 +3,10 @@ package com.checkout.payment.gateway.model;
 import com.checkout.payment.gateway.enums.PaymentStatus;
 import java.util.UUID;
 
-public class GetPaymentResponse {
+public class PaymentResponse {
   private UUID id;
   private PaymentStatus status;
-  private int cardNumberLastFour;
+  private String cardNumber;
   private int expiryMonth;
   private int expiryYear;
   private String currency;
@@ -28,12 +28,12 @@ public class GetPaymentResponse {
     this.status = status;
   }
 
-  public int getCardNumberLastFour() {
-    return cardNumberLastFour;
+  public String getCardNumber() {
+    return cardNumber;
   }
 
-  public void setCardNumberLastFour(int cardNumberLastFour) {
-    this.cardNumberLastFour = cardNumberLastFour;
+  public void setCardNumber(String cardNumber) {
+    this.cardNumber = cardNumber;
   }
 
   public int getExpiryMonth() {
@@ -73,7 +73,7 @@ public class GetPaymentResponse {
     return "GetPaymentResponse{" +
         "id=" + id +
         ", status=" + status +
-        ", cardNumberLastFour=" + cardNumberLastFour +
+        ", cardNumber=" + cardNumber +
         ", expiryMonth=" + expiryMonth +
         ", expiryYear=" + expiryYear +
         ", currency='" + currency + '\'' +
