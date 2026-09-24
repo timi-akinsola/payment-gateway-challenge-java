@@ -70,7 +70,7 @@ public class PaymentResponse {
 
   @Override
   public String toString() {
-    return "GetPaymentResponse{" +
+    return "PaymentResponse{" +
         "id=" + id +
         ", status=" + status +
         ", cardNumberLastFour=" + cardNumberLastFour +

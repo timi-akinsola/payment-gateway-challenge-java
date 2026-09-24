@@ -26,4 +26,11 @@ public class CommonExceptionHandler {
     return new ResponseEntity<>(new ErrorResponse("Payment not found"),
         HttpStatus.NOT_FOUND);
   }
+  
+  @ExceptionHandler(BankServiceException.class)
+  public ResponseEntity<ErrorResponse> handleException(BankServiceException ex) {
+    LOG.error("Exception happened", ex);
+    return new ResponseEntity<>(new ErrorResponse("Payment not processed: bank service unavailable"),
+        HttpStatus.SERVICE_UNAVAILABLE);
+  }
 }

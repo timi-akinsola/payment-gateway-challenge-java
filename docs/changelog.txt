@@ -27,6 +27,11 @@ CHANGELOG:
 14. Turned PaymentsRepository into an interface and created an InMemoryPaymentsRepository class to implement it, to allow for scalability with other data access mechanisms (Postgres, Redis, etc.) while utilising dependency injection.
 15. Created a new PaymentNotFoundException to more accurately categorise exceptions related to PaymentsRepository (e.g. incorrectly input card number).
 
+16. Created BankPaymentRequest and BankPaymentResponse classes to represent data sent to & from the Mountebank simulator, including a computed expiryDate property in the request class.
+	- Left authorize() with American spelling to match PaymentStatus enum.
+17. Created BankClient to handle the authorisation of BankPaymentRequests, and added the Mountebank simulator URL to application.properties for centralised config.
+18. Created BankServiceException to handle bank-side errors (e.g. bank unavailable).
+19. Created BankClientTest and wrote 4 unit test cases to handle different outcomes of the bank payment use case.
 
 GENERAL NOTES: 
 - Changelogs are manually updated -- could import a library (e.g. https://github.com/spring-io/github-changelog-generator) or use implement an AI prompt to autonomously generate a changelog for each commit instead.

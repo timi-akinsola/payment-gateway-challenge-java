@@ -82,14 +82,9 @@ public class PaymentRequest implements Serializable {
     this.cvv = cvv;
   }
 
-  @JsonProperty("expiry_date")
-  public String getExpiryDate() {
-    return String.format("%02d/%02d", expiryMonth, expiryYear);
-  }
-
   @Override
   public String toString() {
-    return "PostPaymentRequest{" +
+    return "PaymentRequest{" +
         "cardNumber=" + cardNumber +
         ", expiryMonth=" + expiryMonth +
         ", expiryYear=" + expiryYear +
