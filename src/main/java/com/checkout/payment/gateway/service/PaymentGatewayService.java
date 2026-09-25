@@ -1,5 +1,7 @@
 package com.checkout.payment.gateway.service;
 
+import com.checkout.payment.gateway.client.BankClient;
+import com.checkout.payment.gateway.enums.PaymentStatus;
 import com.checkout.payment.gateway.exception.PaymentNotFoundException;
 import com.checkout.payment.gateway.model.PaymentRequest;
 import com.checkout.payment.gateway.model.PaymentResponse;
@@ -15,9 +17,11 @@ public class PaymentGatewayService {
   private static final Logger LOG = LoggerFactory.getLogger(PaymentGatewayService.class);
 
   private final PaymentsRepository paymentsRepository;
+  private final BankClient bankClient;
 
-  public PaymentGatewayService(PaymentsRepository paymentsRepository) {
+  public PaymentGatewayService(PaymentsRepository paymentsRepository, BankClient bankClient) {
     this.paymentsRepository = paymentsRepository;
+    this.bankClient = bankClient;
   }
 
   public PaymentResponse getPaymentById(UUID id) {
@@ -25,7 +29,23 @@ public class PaymentGatewayService {
     return paymentsRepository.get(id).orElseThrow(() -> new PaymentNotFoundException("Invalid ID"));
   }
 
-  public UUID processPayment(PaymentRequest paymentRequest) {
-    return UUID.randomUUID();
+  public PaymentResponse processPayment(PaymentRequest paymentRequest) {
+    boolean authorized = bankClient.authorize(paymentRequest);
+
+    PaymentResponse response = new PaymentResponse();
+    response.setId(UUID.randomUUID());
+    response.setStatus(authorized ? PaymentStatus.AUTHORIZED : PaymentStatus.DECLINED);
+    response.setCardNumberLastFour(getLastFourDigits(paymentRequest.getCardNumber()));
+    response.setExpiryMonth(paymentRequest.getExpiryMonth());
+    response.setExpiryYear(paymentRequest.getExpiryYear());
+    response.setCurrency(paymentRequest.getCurrency());
+    response.setAmount(paymentRequest.getAmount());
+
+    paymentsRepository.add(response);
+    return response;
+  }
+
+  private String getLastFourDigits(String cardNumber) {
+    return cardNumber.substring(cardNumber.length() - 4);
   }
 }

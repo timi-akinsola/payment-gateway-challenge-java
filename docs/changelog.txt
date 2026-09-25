@@ -33,6 +33,12 @@ CHANGELOG:
 18. Created BankServiceException to handle bank-side errors (e.g. bank unavailable).
 19. Created BankClientTest and wrote 4 unit test cases to handle different outcomes of the bank payment use case.
 
+20. Removed "api" parameter from RestController in PaymentGatewayController as it's unneeded.
+21. Renamed "payment/" API endpoints to "payments/" in PaymentGatewayController to match the Mountebank endpoints.
+22. Implemented processPayment in PaymentGatewayService using BankClient via injection.
+23. Exposed a POST endpoint in PaymentGatewayController to handle the processing of PaymentRequests via PaymentGatewayService.
+24. Extended ErrorResponse and added a MethodArgumentNotValidException case in CommonExceptionHandler, along with a @Valid keyword in PaymentGatewayController to raise grouped validation errors when processing PaymentRequests.
+
 GENERAL NOTES: 
-- Changelogs are manually updated -- could import a library (e.g. https://github.com/spring-io/github-changelog-generator) or use implement an AI prompt to autonomously generate a changelog for each commit instead.
+- Changelogs are manually updated -- could import a library (e.g. https://github.com/spring-io/github-changelog-generator) or use implement an AI skill/prompt to autonomously generate a changelog for each commit instead.
 	- This was done so I had a clearer picture on my progress and rationale behind my actions at each step, in case I thought of a better refactor/optimisation approach later on.
