@@ -44,6 +44,9 @@ CHANGELOG:
 
 26. Added a suite of Testcontainers integration tests to test user stories from end to end.
 
+27. Removed EventProcessingException as it's not used.
+28. Added SpotBugs, Spotless, Dependabot, and DependencyManagement plugins for code cleanliness, and created a CI/CD pipeline YAML to handle running the Testcontainers tests in a CI environment.
+
 GENERAL NOTES: 
 - Changelogs are manually updated -- could import a library (e.g. https://github.com/spring-io/github-changelog-generator) or use implement an AI skill/prompt to autonomously generate a changelog for each commit instead.
 	- This was done so I had a clearer picture on my progress and rationale behind my actions at each step, in case I thought of a better refactor/optimisation approach later on.

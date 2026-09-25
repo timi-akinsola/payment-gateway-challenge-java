@@ -70,14 +70,22 @@ public class PaymentResponse {
 
   @Override
   public String toString() {
-    return "PaymentResponse{" +
-        "id=" + id +
-        ", status=" + status +
-        ", cardNumberLastFour=" + cardNumberLastFour +
-        ", expiryMonth=" + expiryMonth +
-        ", expiryYear=" + expiryYear +
-        ", currency='" + currency + '\'' +
-        ", amount=" + amount +
-        '}';
+    return "PaymentResponse{"
+        + "id="
+        + id
+        + ", status="
+        + status
+        + ", cardNumberLastFour="
+        + cardNumberLastFour
+        + ", expiryMonth="
+        + expiryMonth
+        + ", expiryYear="
+        + expiryYear
+        + ", currency='"
+        + currency
+        + '\''
+        + ", amount="
+        + amount
+        + '}';
   }
 }

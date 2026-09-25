@@ -3,9 +3,7 @@ package com.checkout.payment.gateway.controller;
 import com.checkout.payment.gateway.model.PaymentRequest;
 import com.checkout.payment.gateway.model.PaymentResponse;
 import com.checkout.payment.gateway.service.PaymentGatewayService;
-
 import jakarta.validation.Valid;
-
 import java.net.URI;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;

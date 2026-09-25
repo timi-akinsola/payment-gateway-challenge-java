@@ -9,5 +9,4 @@ public interface PaymentsRepository {
   public void add(PaymentResponse payment);
 
   public Optional<PaymentResponse> get(UUID id);
-
 }

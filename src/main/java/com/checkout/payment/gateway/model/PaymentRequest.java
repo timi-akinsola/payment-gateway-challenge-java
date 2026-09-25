@@ -1,7 +1,6 @@
 package com.checkout.payment.gateway.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -9,29 +8,32 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
-
 import java.io.Serializable;
 import java.time.YearMonth;
 
 public class PaymentRequest implements Serializable {
 
   @JsonProperty("card_number")
-  @NotBlank 
+  @NotBlank
   @Pattern(regexp = "\\d{14,19}")
   private String cardNumber;
+
   @JsonProperty("expiry_month")
   @NotNull
   @Min(1)
   @Max(12)
   private Integer expiryMonth;
+
   @JsonProperty("expiry_year")
   @NotNull
   private Integer expiryYear;
+
   @NotBlank
   @Pattern(regexp = "USD|GBP|EUR", message = "must be one of: USD, GBP, EUR")
   private String currency;
-  @Positive
-  private int amount;
+
+  @Positive private int amount;
+
   @NotBlank
   @Pattern(regexp = "\\d{3,4}")
   private String cvv;
@@ -94,12 +96,18 @@ public class PaymentRequest implements Serializable {
 
   @Override
   public String toString() {
-    return "PaymentRequest{" +
-        "cardNumber=" + cardNumber +
-        ", expiryMonth=" + expiryMonth +
-        ", expiryYear=" + expiryYear +
-        ", currency='" + currency + '\'' +
-        ", amount=" + amount +
-        '}';
+    return "PaymentRequest{"
+        + "cardNumber="
+        + cardNumber
+        + ", expiryMonth="
+        + expiryMonth
+        + ", expiryYear="
+        + expiryYear
+        + ", currency='"
+        + currency
+        + '\''
+        + ", amount="
+        + amount
+        + '}';
   }
 }

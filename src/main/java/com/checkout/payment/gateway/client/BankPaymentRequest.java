@@ -7,13 +7,16 @@ public class BankPaymentRequest {
 
   @JsonProperty("card_number")
   private final String cardNumber;
+
   @JsonProperty("expiry_date")
   private final String expiryDate;
+
   private final String currency;
   private final int amount;
   private final String cvv;
 
-  private BankPaymentRequest(String cardNumber, String expiryDate, String currency, int amount, String cvv) {
+  private BankPaymentRequest(
+      String cardNumber, String expiryDate, String currency, int amount, String cvv) {
     this.cardNumber = cardNumber;
     this.expiryDate = expiryDate;
     this.currency = currency;
@@ -23,13 +26,18 @@ public class BankPaymentRequest {
 
   public static BankPaymentRequest from(PaymentRequest request) {
     String expiryDate = String.format("%02d/%d", request.getExpiryMonth(), request.getExpiryYear());
-    return new BankPaymentRequest(request.getCardNumber(), expiryDate, request.getCurrency(), request.getAmount(), request.getCvv());
+    return new BankPaymentRequest(
+        request.getCardNumber(),
+        expiryDate,
+        request.getCurrency(),
+        request.getAmount(),
+        request.getCvv());
   }
 
   public String getCardNumber() {
     return cardNumber;
   }
-  
+
   public String getExpiryDate() {
     return expiryDate;
   }
@@ -48,11 +56,16 @@ public class BankPaymentRequest {
 
   @Override
   public String toString() {
-    return "BankPaymentRequest{" +
-        "cardNumber=" + cardNumber +
-        ", expiryDate=" + expiryDate +
-        ", currency='" + currency + '\'' +
-        ", amount=" + amount +
-        '}';
+    return "BankPaymentRequest{"
+        + "cardNumber="
+        + cardNumber
+        + ", expiryDate="
+        + expiryDate
+        + ", currency='"
+        + currency
+        + '\''
+        + ", amount="
+        + amount
+        + '}';
   }
 }
