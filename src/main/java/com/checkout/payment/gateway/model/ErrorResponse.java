@@ -12,7 +12,7 @@ public class ErrorResponse {
 
   public ErrorResponse(String message, List<String> errors) {
     this.message = message;
-    this.errors = errors;
+    this.errors = errors == null ? null : List.copyOf(errors);
   }
 
   public String getMessage() {
@@ -25,9 +25,6 @@ public class ErrorResponse {
 
   @Override
   public String toString() {
-    return "ErrorResponse{" +
-        "message='" + message + '\'' +
-        ", errors='" + errors + '\'' +
-        '}';
+    return "ErrorResponse{" + "message='" + message + '\'' + ", errors='" + errors + '\'' + '}';
   }
 }
