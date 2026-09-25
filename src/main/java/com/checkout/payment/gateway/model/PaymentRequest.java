@@ -2,6 +2,7 @@ package com.checkout.payment.gateway.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -10,6 +11,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
 import java.io.Serializable;
+import java.time.YearMonth;
 
 public class PaymentRequest implements Serializable {
 
@@ -26,7 +28,7 @@ public class PaymentRequest implements Serializable {
   @NotNull
   private Integer expiryYear;
   @NotBlank
-  @Pattern(regexp = "[A-Z]{3}")
+  @Pattern(regexp = "USD|GBP|EUR", message = "must be one of: USD, GBP, EUR")
   private String currency;
   @Positive
   private int amount;
@@ -80,6 +82,14 @@ public class PaymentRequest implements Serializable {
 
   public void setCvv(String cvv) {
     this.cvv = cvv;
+  }
+
+  @AssertTrue(message = "expiry date must not be in the past")
+  private boolean isExpiryInTheFuture() {
+    if (expiryMonth == null || expiryYear == null) {
+      return true; // The @NotNull annotation should report this instead.
+    }
+    return !YearMonth.of(expiryYear, expiryMonth).isBefore(YearMonth.now());
   }
 
   @Override

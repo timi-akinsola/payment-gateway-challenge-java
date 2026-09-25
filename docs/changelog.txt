@@ -20,6 +20,7 @@ CHANGELOG:
 	- NOTE: Would use Range but that's from the Hibernate package while all other validators are from Jakarta, so let's minimise dependencies.
 9. Changed expiryMonth and expiryYear to Integer and added NotNull constraint, to make it more clear that the values cannot be null/blank as ints.
 10. Added NotBlank and Regex constraint to currency.
+	- UPDATE: Changed regex from "[A-Z]{3}" to "USD|GBP|EUR" to enforce currency to only accept USD, GBP, and EUR at the moment.
 11. Added Positive constraint to amount.
 12. Added NotBlank and Pattern constraint to CVV.
 13. Removed CVV from PaymentRequest.toString() to avoid exposing sensitive data.
@@ -38,6 +39,8 @@ CHANGELOG:
 22. Implemented processPayment in PaymentGatewayService using BankClient via injection.
 23. Exposed a POST endpoint in PaymentGatewayController to handle the processing of PaymentRequests via PaymentGatewayService.
 24. Extended ErrorResponse and added a MethodArgumentNotValidException case in CommonExceptionHandler, along with a @Valid keyword in PaymentGatewayController to raise grouped validation errors when processing PaymentRequests.
+
+25. Added @AssertTrue annotation for expiry date in PaymentRequest to validate that the date is not in the past.
 
 GENERAL NOTES: 
 - Changelogs are manually updated -- could import a library (e.g. https://github.com/spring-io/github-changelog-generator) or use implement an AI skill/prompt to autonomously generate a changelog for each commit instead.
