@@ -42,6 +42,8 @@ CHANGELOG:
 
 25. Added @AssertTrue annotation for expiry date in PaymentRequest to validate that the date is not in the past.
 
+26. Added a suite of Testcontainers integration tests to test user stories from end to end.
+
 GENERAL NOTES: 
 - Changelogs are manually updated -- could import a library (e.g. https://github.com/spring-io/github-changelog-generator) or use implement an AI skill/prompt to autonomously generate a changelog for each commit instead.
 	- This was done so I had a clearer picture on my progress and rationale behind my actions at each step, in case I thought of a better refactor/optimisation approach later on.
